@@ -16,5 +16,10 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     // D - Delete
 
     List<Employee> findByEmail(String email);
+    List<Employee> findByAge(int age);
+    List<Employee> findByfirstName(String firstname);
+    List<Employee> findByPhone(long phone);
+
+
 
 }

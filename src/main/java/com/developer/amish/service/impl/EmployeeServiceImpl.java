@@ -19,7 +19,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee insertEmployee(Employee employee) {
+    //predefine function of save in crud repo. we can just change the method name to anything.
+    public Employee registerEmployee(Employee employee) {
         return this.employeeRepository.save(employee);
     }
 
@@ -34,4 +35,31 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> findByEmail(String email) {
         return this.employeeRepository.findByEmail(email);
     }
+    @Override
+    public List<Employee> findByAge(int age){
+        return this.employeeRepository.findByAge(age);
+    }
+    @Override
+    public List<Employee> findByfirstName(String firstName){
+        return this.employeeRepository.findByfirstName(firstName);
+    }
+    @Override
+    public List<Employee> findByPhone(long phone){
+        return this.employeeRepository.findByPhone(phone);
+    }
+    @Override
+    public Employee updateEmail(Long empId, String newEmail) {
+        return employeeRepository.findById(empId).map(employee -> {
+            employee.setEmail(newEmail);
+            return employeeRepository.save(employee);
+        }).orElseThrow(() -> new RuntimeException("Employee not found"));
+    }
+    @Override
+    public Employee updatephone(long empId, long newphone){
+        return employeeRepository.findById(empId).map(employee ->{
+            employee.setPhone(newphone);
+            return employeeRepository.save(employee);
+        }).orElseThrow(() -> new RuntimeException("Employee not found"));
+    }
+
 }
