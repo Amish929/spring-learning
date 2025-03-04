@@ -1,6 +1,8 @@
 package com.developer.amish.service;
 
 import com.developer.amish.entity.Employee;
+import org.springframework.data.domain.Page;
+
 
 import java.util.List;
 
@@ -20,4 +22,7 @@ public interface EmployeeService {
 
     Employee updateEmail(Long empId, String email);
     Employee updatephone(long empId, long phone);
+   List<Employee>  findAll(Employee employee);
+
+    Page<Employee> getEmployees(int pageNo, int pageSize, String sortField, String direction);
 }

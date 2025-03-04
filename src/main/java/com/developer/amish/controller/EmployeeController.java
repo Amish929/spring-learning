@@ -1,11 +1,11 @@
 package com.developer.amish.controller;
 
 import com.developer.amish.entity.Employee;
-import com.developer.amish.repository.EmployeeRepository;
 import com.developer.amish.service.EmployeeService;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -71,6 +71,20 @@ public ResponseEntity<String> updateEmployeeEmail(@PathVariable Long empId, @Val
     } catch (RuntimeException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
+}
+@GetMapping("/get-employees")
+    public List<Employee> findAll(Employee employee){
+        return (List<Employee>) this.employeeService.findAll(employee);
+}
+@GetMapping("/page-implementation")
+public ResponseEntity<Page<Employee>> getProducts(
+        @RequestParam(defaultValue = "0") int pageNo,
+        @RequestParam(defaultValue = "0") int pageSize,
+        @RequestParam(defaultValue = "ASC") String direction, //for ascending we have to pass ASC and for decending DESC
+        @RequestParam(defaultValue = "empId") String sortField){
+
+    Page<Employee> products = employeeService.getEmployees(pageNo, pageSize,direction,sortField);
+    return ResponseEntity.ok(products);
 }
 
 }

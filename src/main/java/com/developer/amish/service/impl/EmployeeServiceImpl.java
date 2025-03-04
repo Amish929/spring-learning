@@ -4,7 +4,10 @@ import com.developer.amish.entity.Employee;
 import com.developer.amish.repository.EmployeeRepository;
 import com.developer.amish.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -60,6 +63,14 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setPhone(newphone);
             return employeeRepository.save(employee);
         }).orElseThrow(() -> new RuntimeException("Employee not found"));
+    }
+    @Override
+    public List<Employee> findAll(Employee employee){
+        return (List<Employee>) this.employeeRepository.findAll();
+    }
+    public Page<Employee> getEmployees(int pageNo, int pageSize, String direction, String sortField) {
+        Pageable pageable = (Pageable) PageRequest.of(pageNo, pageSize, Sort.Direction.valueOf(direction), sortField);
+        return (Page<Employee>) employeeRepository.findAll((org.springframework.data.domain.Pageable) pageable);
     }
 
 }

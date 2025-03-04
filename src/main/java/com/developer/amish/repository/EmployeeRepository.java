@@ -1,8 +1,13 @@
 package com.developer.amish.repository;
 
 import com.developer.amish.entity.Employee;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+
 
 import java.util.List;
 
@@ -20,6 +25,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     List<Employee> findByfirstName(String firstname);
     List<Employee> findByPhone(long phone);
 
+    Page findAll(Pageable pageable);
 
 
+    // List<Employee> findAll(Employee employee);
 }
