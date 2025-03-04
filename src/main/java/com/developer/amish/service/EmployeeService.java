@@ -2,6 +2,7 @@ package com.developer.amish.service;
 
 import com.developer.amish.entity.Employee;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 
 import java.util.List;
@@ -25,4 +26,7 @@ public interface EmployeeService {
    List<Employee>  findAll(Employee employee);
 
     Page<Employee> getEmployees(int pageNo, int pageSize, String sortField, String direction);
+
+   Page<Employee> searchByFirstName(String firstName, Pageable pageable);
+   Page<Employee> searchByLastName(String lastName,Pageable pageable);
 }

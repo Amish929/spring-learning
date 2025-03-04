@@ -73,4 +73,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return (Page<Employee>) employeeRepository.findAll((org.springframework.data.domain.Pageable) pageable);
     }
 
+
+@Override
+public Page<Employee> searchByFirstName(String firstName, Pageable pageable) {
+    return employeeRepository.searchByFirstName(firstName, pageable);
+}
+@Override
+    public Page<Employee> searchByLastName(String lastName, Pageable pageable){
+        return this.employeeRepository.searchByLastName(lastName,pageable);
+}
+
+
 }

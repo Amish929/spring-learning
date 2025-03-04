@@ -6,6 +6,7 @@ import com.developer.amish.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -87,5 +88,14 @@ public ResponseEntity<Page<Employee>> getProducts(
     return ResponseEntity.ok(products);
 }
 
+
+    @GetMapping("/search-by-firstName")
+    public Page<Employee> searchByFirstName(@RequestParam String firstName, Pageable pageable) {
+        return employeeService.searchByFirstName(firstName, pageable);
+    }
+    @GetMapping("/search-by-lastName")
+    public  Page<Employee> searchByLastName(@RequestParam String lastName,  Pageable pageable){
+        return this.employeeService.searchByLastName(lastName,pageable);
+    }
 }
 
