@@ -16,6 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
+
     @Autowired
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -68,6 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> findAll(Employee employee){
         return (List<Employee>) this.employeeRepository.findAll();
     }
+
     public Page<Employee> getEmployees(int pageNo, int pageSize, String direction, String sortField) {
         Pageable pageable = (Pageable) PageRequest.of(pageNo, pageSize, Sort.Direction.valueOf(direction), sortField);
         return (Page<Employee>) employeeRepository.findAll((org.springframework.data.domain.Pageable) pageable);
@@ -82,6 +84,11 @@ public Page<Employee> searchByFirstName(String firstName, Pageable pageable) {
     public Page<Employee> searchByLastName(String lastName, Pageable pageable){
         return this.employeeRepository.searchByLastName(lastName,pageable);
 }
+@Override
+    public void deleteById(Long empId){
+    this.employeeRepository.deleteById(empId) ;
+    System.out.println("Employee deleted successfully");
+    }
 
 
 }

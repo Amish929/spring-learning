@@ -26,6 +26,7 @@ public class EmployeeController {
     }
 
     @PostMapping("")
+    
     public Employee registerEmployee( @Valid @RequestBody Employee employee) {
         return this.employeeService.registerEmployee(employee);
     }
@@ -96,6 +97,11 @@ public ResponseEntity<Page<Employee>> getProducts(
     @GetMapping("/search-by-lastName")
     public  Page<Employee> searchByLastName(@RequestParam String lastName,  Pageable pageable){
         return this.employeeService.searchByLastName(lastName,pageable);
+    }
+    @DeleteMapping("{empId}")
+    public void deleteById(@PathVariable("empId") Long empId){
+        this.employeeService.deleteById(empId);
+
     }
 }
 

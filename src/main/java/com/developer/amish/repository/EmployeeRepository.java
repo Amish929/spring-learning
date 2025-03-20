@@ -2,9 +2,7 @@ package com.developer.amish.repository;
 
 import com.developer.amish.entity.Employee;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.domain.Pageable;
@@ -34,4 +32,6 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     Page<Employee> searchByFirstName(String firstName, Pageable pageable);
     Page<Employee> searchByLastName(String lastName, Pageable pageable);
+
+  //  Employee deleteById(Long empId);
 }

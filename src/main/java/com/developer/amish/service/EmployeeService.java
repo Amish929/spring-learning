@@ -29,4 +29,5 @@ public interface EmployeeService {
 
    Page<Employee> searchByFirstName(String firstName, Pageable pageable);
    Page<Employee> searchByLastName(String lastName,Pageable pageable);
+   void deleteById(Long empId);
 }

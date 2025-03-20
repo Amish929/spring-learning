@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -32,6 +34,7 @@ public class Employee {
     private int age;
     private long phone;
 
+
     //private String  setEmail;
 
 //    public void setEmail(String newEmail) {
@@ -45,4 +48,12 @@ public class Employee {
     public void setPhone(long phone) {
         this.phone = phone;
     }
+
+    @OneToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+    @OneToMany( mappedBy = "employee", cascade = CascadeType.ALL)
+
+    private List<Project> projects = new ArrayList<>();
 }
