@@ -1,6 +1,8 @@
 package com.developer.amish.service.impl;
 
+import com.developer.amish.entity.Department;
 import com.developer.amish.entity.Employee;
+import com.developer.amish.repository.DepartmentRepository;
 import com.developer.amish.repository.EmployeeRepository;
 import com.developer.amish.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +18,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
+    private final DepartmentRepository departmentRepository;
+
 
     @Autowired
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository,
+                               DepartmentRepository departmentRepository) {
         this.employeeRepository = employeeRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     @Override
     //predefine function of save in crud repo. we can just change the method name to anything.
     public Employee registerEmployee(Employee employee) {
+        Department department = this.departmentRepository.findById((long) employee.getDepartment().getId())
+                .orElseThrow(() -> new RuntimeException("Department not found with id: " + employee.getDepartment().getId()));
+        employee.setDepartment(department);
         return this.employeeRepository.save(employee);
     }
 

@@ -9,10 +9,13 @@ import java.util.List;
 @Data
 @Table(name = "department")
 public class Department {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-    private int depId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     private String depName;
-   @ManyToMany(mappedBy = "department")
+
+    @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 }
