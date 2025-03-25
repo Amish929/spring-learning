@@ -53,7 +53,26 @@ public class Employee {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    @OneToMany( mappedBy = "employee", cascade = CascadeType.ALL)
+   @OneToMany( cascade = CascadeType.ALL)
+   @JoinColumn(name = "employee_id")  // i have set it in one direction mapping making one as owner of relationship
+    private List<Project> projects;
 
-    private List<Project> projects = new ArrayList<>();
+//    public void setProjects(List<Project> projects) {
+//        this.projects = projects;
+//        for (Project project : projects) {
+//            project.setEmployee(this);  // Important step to set the employee reference
+//        } setting of explicity for one to many
+//    }
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "employee_project",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "department_id")
+    )
+    private List<Department> department;
 }
+
+
+

@@ -14,9 +14,16 @@ public class Project {
 
     private String projectName;
 
-   @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Employee employee;
+//  @ManyToOne
+//  @JoinColumn(name = "employee_id")
+//    private Employee employee;
 
 
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }   setting it explicitely
+//
+//    public Employee getEmployee() {
+//        return employee;
+//    }
 }

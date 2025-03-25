@@ -20,5 +20,5 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Employee employee;
 
-    // Constructors, Getters, and Setters
+
 }
